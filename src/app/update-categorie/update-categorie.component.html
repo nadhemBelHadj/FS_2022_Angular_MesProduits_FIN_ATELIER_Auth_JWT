@@ -1,0 +1,16 @@
+<form>
+    <div  [hidden]="ajout" >
+        <label>ID Catégorie</label>
+        <input type="text" [readonly]="!ajout" [(ngModel)]="categorie.idCat" name="idCategorie" class="form-control w-25">
+    </div>
+    <div>
+        <label>Nom Catégorie</label>
+        <input type="text" [(ngModel)]="categorie.nomCat" name="nomCategorie" class="form-control"
+            placeholder="Entrez un nom de catégorie...">
+    </div>
+    <div class="mt-2">
+        <button type="submit" [disabled]="!categorie.nomCat" class="btn btn-success"
+            (click)="saveCategorie()">{{ajout ? 'Ajouter' : 'Modifier'}}
+        </button>
+    </div>
+</form>
