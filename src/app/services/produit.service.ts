@@ -45,8 +45,9 @@ export class ProduitService {
   listeProduit(): Observable<Produit[]>{
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt})
-return this.http.get<Produit[]>(apiURL+"/all",{headers:httpHeaders});
+    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+   
+     return this.http.get<Produit[]>(apiURL+"/all",{headers:httpHeaders});
 
     }
 
@@ -54,32 +55,35 @@ return this.http.get<Produit[]>(apiURL+"/all",{headers:httpHeaders});
       let jwt = this.authService.getToken();
       jwt = "Bearer "+jwt;
       let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
-        return this.http.post<Produit>(apiURL, prod, {headers:httpHeaders});
+        return this.http.post<Produit>(apiURL+"/addprod", prod, {headers:httpHeaders});
       }
      
       
    
   supprimerProduit(id : number) {
-        const url = `${apiURL}/${id}`;
+       const url = `${apiURL}/delprod/${id}`;
         let jwt = this.authService.getToken();
         jwt = "Bearer "+jwt;
         let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
           return this.http.delete(url,  {headers:httpHeaders});
         }
       
-       consulterProduit(id: number): Observable<Produit> {
-          const url = `${apiURL}/${id}`;
+   consulterProduit(id: number): Observable<Produit> {
+          const url = `${apiURL}/getbyid/${id}`;
+          console.log(url);
           let jwt = this.authService.getToken();
           jwt = "Bearer "+jwt;
           let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
             return this.http.get<Produit>(url,{headers:httpHeaders});
           }
   
-      updateProduit(prod :Produit) : Observable<Produit>    {
+    updateProduit(prod :Produit) : Observable<Produit>    {
+       console.log("prooooooooooood "+prod);
+        console.log(prod.categorie);
           let jwt = this.authService.getToken();
           jwt = "Bearer "+jwt;
           let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
-            return this.http.put<Produit>(apiURL, prod, {headers:httpHeaders});
+            return this.http.put<Produit>(apiURL+"/updateprod", prod, {headers:httpHeaders});
           }
   
 
